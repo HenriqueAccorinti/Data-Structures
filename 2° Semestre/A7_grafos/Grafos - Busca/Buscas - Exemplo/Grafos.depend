@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1634309291 source:d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - busca\buscas - exemplo\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1634309291 d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - busca\buscas - exemplo\fila.h
+
+1634309460 source:d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - busca\buscas - exemplo\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"grafo.h"
+
+1634309291 d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - busca\buscas - exemplo\grafo.h
+

@@ -1,0 +1,251 @@
+//Henrique Fortuna Accorinti	RA:20.00080-4
+//Guilherme Nami Bortolozi      RA:20.00333-0
+//André Polgrymas Gers          RA:19.00578-4
+//Matheus Ferreira Palú         RA:20.00332-3
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "sqlite3.h"
+#define MAX 500
+
+// 9) Ler String s[]
+void lerString(char s[]){
+    fflush(stdin);
+    fgets(s,MAX,stdin);
+
+    if(s[strlen(s)-1] == '\n'){
+        s[strlen(s)-1] = '\0';
+    }
+}
+
+void ExibirTabela(sqlite3_stmt *stmt)
+{
+    int i;
+    // exibe o cabeçalho
+    for (i = 0; i < sqlite3_column_count(stmt); i++)
+        printf("%s\t\t", sqlite3_column_name(stmt,i));
+    printf("\n");
+
+    // para cada linha da tabela
+    while(sqlite3_step(stmt) != SQLITE_DONE)
+    {
+        // para cada coluna da linha
+        for (i = 0; i < sqlite3_column_count(stmt); i++)
+            if (sqlite3_column_type(stmt, i) == SQLITE_FLOAT)
+                printf("%.2f\t", sqlite3_column_double(stmt,i)); // formata valores reais com 2 casas
+            else
+                printf("%s\t", sqlite3_column_text(stmt,i));
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void mostraMenu()
+{
+printf("\nInforme a opcao desejada:\n1 - Nova venda\n2 - Adicionar ao carrinho\n3 - Fechar venda\n4 - Gerenciar Estoque\n5 - Sair\n\n");
+}
+
+int main()
+{
+    sqlite3 *db = NULL;
+    sqlite3_stmt *stmt = NULL;
+    char sql[MAX];
+    int conexao;
+
+    int cod, qtd, opcao, ident;
+    float preco;
+    char prod_novo[MAX];
+
+    //Abre a conexão com o banco
+    conexao = sqlite3_open("Lojinha.db", &db);
+    if (conexao != SQLITE_OK)
+    {
+        printf("Erro ao conectar ao banco\n");
+        exit(-1);
+    }
+
+    // laço principal
+    do
+    {
+        // Faz a chamada do menu e a leitura da opção do usuário
+        system("cls");
+        mostraMenu();
+        printf("Opcao: ");
+        scanf("%i", &opcao);
+
+        // se deseja fazer uma consulta
+        if (opcao != 5)
+        {
+
+            // verifica a opção desejada
+            switch(opcao)
+            {
+            case 1:
+            {
+                //Nova venda: deve determinar o valor do identificador da venda que será realizada. Para isso, deve-se
+                //verificar qual o último código de venda utilizado ou definir o valor da primeira venda da loja como 1.
+                sprintf(sql,"SELECT MAX(idVenda) FROM vendas");
+                //printf("\n%s\n\n", sql); // POPPA
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+
+                if (sqlite3_step(stmt) == SQLITE_ROW){
+                    ident = (sqlite3_column_int(stmt,0))+1;
+                }
+
+                printf("Venda %i iniciada!\nDigite 2 para adicionar a compra ao carrinho\n", ident);
+                sprintf(sql,"SELECT MAX(idVenda) FROM vendas");
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                break;
+            } // fim do case 1
+
+            case 2:
+            {
+                //Adicionar ao carrinho
+                sprintf(sql, "SELECT * FROM estoque");
+                //printf("\n%s\n\n", sql); // POPPA
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+
+                //Apresentar a tabela do estoque
+                ExibirTabela(stmt);
+
+                //Permitir ao usuário digitar o código do produto, bem como a quantidade que o cliente deseja
+                printf("Codigo do produto a ser comprado: ");
+                scanf("%i", &cod);
+
+                printf("Quantidade a ser comprada: ");
+                scanf("%i", &qtd);
+
+                // if_1 - verificar se o produto existe no estoque
+                sprintf(sql, "SELECT * FROM estoque WHERE codigo = %i", cod);
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+
+                if (sqlite3_step(stmt) == SQLITE_ROW){
+
+                    //if_2 - verificar se a quantidade solicitada esta disponivel
+                    sprintf(sql, "SELECT quant FROM estoque WHERE codigo = %i", cod);
+                    sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                    if (qtd <= sqlite3_step(stmt)){
+
+                        //argumento - inserir os dados necessarios na venda em aberto
+                        sprintf(sql, "INSERT INTO vendas VALUES (%i, %i, %i, (SELECT preco FROM estoque WHERE codigo = %i))", ident, cod, qtd, cod);
+                        sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                        sqlite3_step(stmt);
+
+                        sprintf(sql, "SELECT * FROM vendas");
+                        sqlite3_prepare(db, sql, -1, &stmt, NULL);
+
+                            //if_3 - verificar item com codigo ja inserido
+                            sprintf(sql, "SELECT * FROM vendas WHERE codigo = %i", cod);
+                            sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                            if (sqlite3_step(stmt) == SQLITE_ROW){
+                                //incrementar a qnt
+                                sprintf(sql, "UPDATE vendas SET quant = quant + %i WHERE codigo = %i", qtd, cod);
+                                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                                sqlite3_step(stmt);
+                            }
+                            //exibir valor da venda atual
+                            sprintf(sql, "SELECT preco FROM vendas WHERE codigo = %i", cod);
+                            sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                            printf("\nVALOR DA VENDA ATUAL:\n");
+                            ExibirTabela(stmt);
+
+                        //retirar qnt vendida do estoque
+                        sprintf(sql, "UPDATE estoque SET quant = quant - %i WHERE codigo = %i", qtd, cod);
+                        //printf(sql);
+                        sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                        sqlite3_step(stmt);
+                        //exibir dados do estoque atual (mais facil chamar o cara do patins pra dar uma conferida la no estoque)
+                        sprintf(sql, "SELECT * FROM estoque");
+                        sqlite3_prepare(db, sql, -1, &stmt, NULL);
+
+                        printf("\nESTOQUE ATUAL:\n");
+                        ExibirTabela(stmt);
+
+                    }else //else_2 - informar que a qnt solicitada não é suficiente no estoque
+                        printf("\nQuantidade solicitada nao suficiente\n\n");
+                }else //else_1 - informar que o produto não esta cadastrado
+                    printf("\nProduto nao cadastrado\n\n");
+
+
+                break;
+            } // fim do case 2
+
+            case 3:
+            {
+                //Fechar venda: Exibe todos os dados da venda atual, além de calcular e exibir o valor total da venda.
+                sprintf(sql,"SELECT * FROM vendas WHERE idVenda = (SELECT MAX(idVenda) FROM vendas)");
+                //printf("\n%s\n\n", sql); // POPPA
+                printf("\nRESUMO DA VENDA:\n");
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                ExibirTabela(stmt);
+
+                sprintf(sql,"SELECT (quant*preco) AS 'Preco total: ' FROM vendas WHERE idVenda = (SELECT MAX(idVenda) FROM vendas)");
+                //printf("\n%s\n\n", sql); // POPPA
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                ExibirTabela(stmt);
+                break;
+            } // fim do case 3
+
+            case 4:
+            {
+                //Gerenciar estoque
+                sprintf(sql,"SELECT * FROM estoque");
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                //Apresentar a tabela do estoque
+                printf("ESTOQUE ATUAL:\n");
+                ExibirTabela(stmt);
+
+                //O usuário deve informar o código de um produto para ser adicionado ao estoque, ou 0 (zero) para incluir um novo produto
+                printf("Insira o codigo do produto (ou digite 0 para adicionar um novo produto):\n");
+                scanf("%i", &cod);
+
+                sprintf(sql,"SELECT * FROM estoque WHERE codigo = %i", cod);
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                //não faça o if verificando se o valor é zero, mas verificando se o código existe na tabela
+                if (sqlite3_step(stmt) != SQLITE_ROW) //produto novo
+                {
+
+                // 9) Ler String s[]
+                printf("Digite o novo produto");
+                lerString(prod_novo);
+
+                printf("\nQuantidade: ");
+                scanf("%i", &qtd);
+
+                printf("\nPreco: ");
+                scanf("%i", &preco);
+
+                sprintf(sql, "INSERT INTO estoque VALUES (%i, %s, %i, %f)", cod, prod_novo, qtd, preco);
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                sqlite3_step(stmt);
+
+                }else{ //produto ja cadastrado
+                sprintf(sql,"SELECT quant, preco FROM estoque WHERE codigo = %i", cod);
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+
+                printf("Quantidade: ");
+                scanf("%i", &qtd);
+
+                printf("Preco: ");
+                scanf("%i", &preco);
+
+                //incrementar a qnt
+                sprintf(sql, "UPDATE estoque SET quant = quant + %i WHERE codigo = %i", qtd, cod);
+                sqlite3_prepare(db, sql, -1, &stmt, NULL);
+                sqlite3_step(stmt);
+
+                }
+                
+                break;
+            } // fim do case 4
+            } // fim do switch
+            system("pause");
+        }
+    }
+    while(opcao != 5);
+    printf("\nCPF na nota?\n");
+    printf("...\nVolte Sempre!\n...\n");
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return 0;
+}

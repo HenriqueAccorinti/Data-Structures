@@ -1,0 +1,7 @@
+banana;10;4.5
+maca;4;3.0
+uva;2;8.5
+limao;10;1.0
+abacaxi;1;6.5
+pera;3;4.5
+miojo;1;1.99

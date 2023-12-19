@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void quick(int *v, int l, int r);
+int particionar(int *v, int l, int r, int p);
+void trocar(int *a, int *b);
+void teste(int *a, int *b);
+
+int main(){
+    int vetor[10] = {2,5,1,7,8,4,3,6,10,9};
+    int i, x = 4, y = 7;
+
+
+    printf("********  Vetor original  **********\n\n");
+    for(i = 0; i<10; i++){
+        printf("v[%i] = %i\n",i,vetor[i]);
+    }
+
+    quick(vetor,0,9);
+
+    printf("\n");
+    printf("********  Vetor ordenado  **********\n\n");
+    for(i = 0; i<10; i++){
+        printf("v[%i] = %i\n",i,vetor[i]);
+    }
+
+    return 0;
+}
+
+void quick(int *v, int l, int r){
+    int pivo, novoPivo;
+    if(l<r){
+        pivo = (l+r)/2;
+        novoPivo = particionar(v,l,r,pivo);
+        quick(v, l, novoPivo - 1);
+        quick(v, novoPivo + 1, r);
+    }
+}
+
+int particionar(int *v, int l, int r, int p){
+    int i, j;
+    int valor_pivo = v[p];
+
+    trocar(&v[p], &v[r]);
+    j = l;
+    for(i=l; i<=r-1;i++){
+        if(v[i]<=valor_pivo){
+            trocar(&v[i],&v[j]);
+            j++;
+        }
+    }
+    trocar(&v[j],&v[r]);
+    return j;
+}
+
+void trocar(int *a, int *b){
+    int aux;
+
+    aux = *a;
+    *a = *b;
+    *b = aux;
+}

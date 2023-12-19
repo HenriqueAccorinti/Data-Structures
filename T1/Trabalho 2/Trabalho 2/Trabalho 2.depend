@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1623430290 source:d:\mauá\2021\est de dados\t1\trabalho 2\trabalho 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+

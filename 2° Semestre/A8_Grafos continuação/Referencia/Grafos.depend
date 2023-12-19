@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1444844127 source:x:\ecm403\16 - grafos\aula 04 - grafos e caminhos\distribuir\grafo.c
+	"grafo.h"
+	"fila.h"
+	<math.h>
+
+1444841940 x:\ecm403\16 - grafos\aula 04 - grafos e caminhos\distribuir\grafo.h
+
+1408135912 x:\ecm403\16 - grafos\aula 04 - grafos e caminhos\distribuir\fila.h
+
+1476212501 source:x:\ecm403\16 - grafos\aula 04 - grafos e caminhos\distribuir\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"grafo.h"
+
+1408136032 source:x:\ecm403\16 - grafos\aula 04 - grafos e caminhos\distribuir\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1634905044 source:d:\mauá\2021\est de dados\2° semestre\a8_grafos continuação\referencia\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1634905044 d:\mauá\2021\est de dados\2° semestre\a8_grafos continuação\referencia\fila.h
+
+1634905044 source:d:\mauá\2021\est de dados\2° semestre\a8_grafos continuação\referencia\grafo.c
+	"grafo.h"
+	"fila.h"
+	<math.h>
+
+1634905044 d:\mauá\2021\est de dados\2° semestre\a8_grafos continuação\referencia\grafo.h
+
+1634913896 source:d:\mauá\2021\est de dados\2° semestre\a8_grafos continuação\referencia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"grafo.h"
+

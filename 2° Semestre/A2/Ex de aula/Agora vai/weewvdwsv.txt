@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 100
+
+typedef struct{
+    char nome[N];
+    int idade;
+}Pessoa;
+
+void quick(Pessoa *listaDePessoas, int l, int r);
+int particionar(Pessoa *listaDePessoas, int l, int r, int p);
+void trocar(Pessoa *a, Pessoa *b);
+void teste(int *a, int *b);
+
+int main(){
+    
+    Pessoa listaDePessoas[26] = {
+        {"Gohan",23},{"Goku",43},{"Chichi",43},{"Goten",13},
+        {"Vegeta",48},{"Bulma",47},{"Trunks",14},{"Mr.Satan",44},
+        {"Sanji",19},{"Chopper",19},{"Robin",28},{"Franky",34},
+        {"Brook",88},{"All Might",49},{"Tomura",20},{"Aizawa",31},
+        {"Hawks",23},{"Midoriya",16},{"Jeanist",36},{"Togata",18},
+        {"Endeavour",46},{"Dabi",24},{"Uraraka",15},{"Kirishima",15},
+        {"Todoroki",15},{"Bakugo",15}
+    };
+
+    for(i = 0; i<26; i++){
+        printf("v[%i] = %i\n",i,vetor[i]);
+    }
+
+    quick(vetor,0,9);
+
+    printf("\n");
+    printf("********  Vetor ordenado  **********\n\n");
+    for(i = 0; i<10; i++){
+        printf("v[%i] = %i\n",i,vetor[i]);
+    }
+
+    return 0;
+}
+
+void quick(Pessoa *listaDePessoas, int l, int r){
+    int pivo, novoPivo;
+    if(l<r){
+        pivo = (l+r)/2;
+        novoPivo = particionar(listaDePessoas,l,r,pivo);
+        quick(v, l, novoPivo - 1);
+        quick(v, novoPivo + 1, r);
+    }
+}
+
+int particionar(Pessoa *listaDePessoas, int l, int r, int p){
+    int i, j;
+    int valor_pivo = listaDePessoas[p];
+
+    trocar(&listaDePessoas[p], &listaDePessoas[r]);
+    j = l;
+    for(i=l; i<=r-1;i++){
+        if(strcmp(listaDePessoas[i].nome, valor_pivo)<0){
+            trocar(&listaDePessoas[i],&listaDePessoas[j]);
+            j++;
+        }
+    }
+    trocar(&listaDePessoas[j],&listaDePessoas[r]);
+    return j;
+}
+
+void trocar(Pessoa *a, Pessoa *b){
+    Pessoa aux;
+
+    aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+
+

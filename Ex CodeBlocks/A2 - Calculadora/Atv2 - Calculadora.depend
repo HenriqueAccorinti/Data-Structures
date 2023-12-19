@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1614957266 source:d:\mauá\2021\estrutura de dados\ex codeblocks\atv2 - calculadora\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

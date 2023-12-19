@@ -1,0 +1,235 @@
+//FUNÇÕES EM C
+
+//2 a 4 - Vetores
+//5 a 8 - Matrizes
+//9 a 11 - Strings
+//12 a 16 - Simulado do Projeto
+
+//17 - Bubble Sort
+
+
+// 1) Maior entre 2 números a e b
+void exibeMaior(int a, int b){
+    if(a>b){
+        printf("A maior que b");
+    }
+    else if (a<b){
+        printf("A menor que b");
+    }
+    else{
+        printf("A = b");
+    }
+}
+
+
+// 2) Máximo de um Vetor v[]
+int maximo(int v[]){
+    int i, maior;
+
+    maior = v[0];
+
+    for(i=1;i<N;i++){
+        if(v[i] > maior){
+            maior = v[i];
+        }
+    }
+    return maior;
+}
+
+
+// 3) Mínimo de um Vetor v[]
+int minimo(int v[]){
+    int i, menor;
+
+    menor = v[0];
+
+    for(i=1;i<N;i++){
+        if(v[i] < menor){
+            menor = v[i];
+        }
+    }
+    return menor;
+}
+
+
+// 4) Ler um Vetor v[] (usuario digita)
+void lerVetor(int v[]){
+    int i;
+
+    for(i=0;i<N;i++){
+        printf("entre com o valor[%i]: ",i);
+        scanf("%i",&v[i]);
+    }
+}
+
+
+// 5) Ler uma Matriz M[][N] (usuario digita)
+void lerMatriz(int m[][N]){
+    int i,j;
+
+    for(i=0;i<N;i++){
+        for(j=0;j<N;j++){
+            printf("Digite o valor para mat[%i][%i]: ",i,j);
+            scanf("%i",&m[i][j]);
+        }
+    }
+}
+
+
+// 6) Exibe uma Matriz M[][N]
+void exibirMatriz(int m[][N]){
+    int i,j;
+
+    for(i=0;i<N;i++){
+        for(j=0;j<N;j++){
+            printf("%i\t",m[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
+// 7) Máximo de uma Matriz M[][N]
+int max(int M[NL][NC]){
+    int i, j, maior = M[0][0];
+
+    for (int i=0; i<NL; i++){
+        for(int j=0; j<NC; j++){
+            if(M[i][j] > maior){
+            maior = M[i][j];
+        }
+        }
+    }
+    return maior;
+}
+
+
+// 8) Mínimo de uma Matriz M[][N]
+int min(int M[NL][NC]){
+    int i, j, menor = M[0][0];
+
+    for (int i=0; i<NL; i++){
+        for(int j=0; j<NC; j++){
+            if(M[i][j] < menor){
+            menor = M[i][j];
+        }
+        }
+    }
+    return menor;
+}
+
+
+// 9) Ler String s[]
+void lerString(char s[]){
+    fflush(stdin);
+    printf("Digite seu texto: ");
+    fgets(s,MAX,stdin);
+
+    if(s[strlen(s)-1] == '\n'){
+        s[strlen(s)-1] = '\0';
+    }
+}
+
+
+// 10) Retira espaços de s1[] e guarda em s2[]
+void retirarEspaco(char s1[], char s2[])
+{
+    int i, j = 0;
+    for (i = 0; i < strlen(s1); i++)
+        if (s1[i] != ' '){
+            s2[j] = s1[i];
+            j++;
+        }
+    s2[j] = '\0';  // finalizar a string
+}
+
+
+// 11) Inverter String s1 e guarda em s2[]
+void Inverter(char s1[], char s2[]){
+    int i, j, N;
+    N = strlen(s1);
+    for (i = N-1; i >= 0; i--)
+        s2[N-i-1] = s1[i];
+    s2[N-i-1] = '\0';     // finalizar a string
+}
+
+
+//Simulado do Projeto
+// 12) Exibe um Vetor v[] de tamanho n
+void ExibeVetor(float V[N], int n) {
+	int i;
+	printf("\n( ");
+	for (i = 0; i<N; i++) {
+		printf("%.2f ", i);
+	}
+	printf(")\n\n");
+}
+
+
+// 13) Calcula MT (transposta de M), de nl linhas e nc colunas
+void Transposta(float M[N][N], float MT[N][N], int nl, int nc) {
+	int i, j;
+	for (i = 0; i < nc; i++) {
+		for (j = 0; j < nl; j++) {
+			MT[i][j] = M[j][i];
+		}
+	}
+}
+
+// 14) Cacula aux (Multiplicação entre M1 e M2), de nl linhas e nc colunas
+
+void Multiplica(float M1[N][N], float M2[N][N], float aux[N][N], int nl, int nigual, int nc)
+{
+	int i, j, k;
+	for (i = 0; i < nl; i++) {
+		for (j = 0; j < nc; j++) {
+			aux[i][j] = 0;
+			for (k = 0; k < nigual; k++) {
+				aux[i][j] = aux[i][j] + M1[i][k]*M2[k][j];
+			}
+		}
+	}
+}
+
+
+// 15) Calcula iM, inversa de M[2][2] (APENAS 2X2 !!)
+void Inverte2x2(float M[N][N], float iM[N][N]){
+	float d;
+	d = 1.0 / (M[0][0]*M[1][1] - M[0][1]*M[1][0]);
+	iM[0][0] = +M[1][1]*d;
+	iM[0][1] = -M[0][1]*d;
+	iM[1][0] = -M[1][0]*d;
+	iM[1][1] = +M[0][0]*d;
+}
+
+
+// 16) Calcula VR, multiplicação de M e V
+void MultipiicaV(float M[N][N],float V[N], float VR[N], int nl, int nc){
+	int i,j;
+	for (i = 0; i < nl; i++) {
+		VR[i] = 0;
+		for (j = 0; j < nc; j++) {
+			VR[i] = VR[i] + M[i][j]*V[j];
+		}
+	}
+}
+
+
+// 17) Bubble Sort
+void Ordenar(int N, Livro L[N]){
+    int i,j;
+    char aux;
+
+    for(i=(N-1); i<1; i--){
+        for(j=0; j<(i-1); j++){
+	
+            if(L[j].titulo > L[j+1].titulo){
+		//Funcao Trocar
+                strcpy(aux, L[j].titulo);
+                strcpy(L[j].titulo, L[j+1].titulo);
+                strcpy(L[j+1].titulo, aux);
+
+            }
+        }
+    }
+}

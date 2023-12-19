@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1597111200 source:d:\onedrive\desktop\mercado - c\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1597111200 d:\onedrive\desktop\mercado - c\fila.h
+
+1598305704 source:d:\onedrive\desktop\mercado - c\main.c
+	<stdio.h>
+	<stdlib.h>
+	"clientes.h"
+	"fila.h"
+
+1598304836 d:\onedrive\desktop\mercado - c\clientes.h
+	"fila.h"
+
+1598310208 source:d:\onedrive\desktop\mercado - c\clientes.c
+	<time.h>
+	"fila.h"
+	"clientes.h"
+
+1631891877 source:d:\mauá\2021\est de dados\2° semestre\a6_simulaçao de filas em supermercados\clientes.c
+	<time.h>
+	"fila.h"
+	"clientes.h"
+
+1631836371 d:\mauá\2021\est de dados\2° semestre\a6_simulaçao de filas em supermercados\fila.h
+
+1631836371 d:\mauá\2021\est de dados\2° semestre\a6_simulaçao de filas em supermercados\clientes.h
+	"fila.h"
+
+1631839017 source:d:\mauá\2021\est de dados\2° semestre\a6_simulaçao de filas em supermercados\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1631891877 source:d:\mauá\2021\est de dados\2° semestre\a6_simulaçao de filas em supermercados\main.c
+	<stdio.h>
+	<stdlib.h>
+	"clientes.h"
+	"fila.h"
+

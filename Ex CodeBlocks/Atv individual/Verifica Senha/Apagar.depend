@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1619191972 source:d:\mauá\2021\est de dados\atv\apagar\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

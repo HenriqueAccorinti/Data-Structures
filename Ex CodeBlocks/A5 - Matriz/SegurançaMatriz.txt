@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void lerMatriz(int []);
+void Filtrar(int, int);
+int max(int [][3]);
+int min(int [][3]);
+
+int main(){
+    int maior, menor;
+    int M[3][3]={2,3,5,
+                 3,8,2,
+                 6,7,1};
+
+    maior = max(M);
+    menor = min(M);
+
+printf("\nMaior: %i", maior);
+
+printf("\nMenor: %i\n\n", menor);
+return 0;
+}
+
+//Funções
+void lerVetor(int M[][3]){
+    int i, j, N;
+
+    for(i=0;i<N;i++){
+        printf("Entre com o valor[%i]: ",i);
+        for(j=0;j<N;j++){
+        printf("Entre com o valor[%i]: ",j);
+        scanf("%i",&M[i][j]);
+        }
+    }
+}
+
+int max(int M[][3]){
+    int i, j, maior = M[0][0];
+
+    for (int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            if(M[i][j] > maior){
+            maior = M[i][j];
+        }
+        }
+    }
+    return maior;
+}
+
+int min(int M[][3]){
+    int i, j, menor = M[0][0];
+
+    for (int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            if(M[i][j] < menor){
+            menor = M[i][j];
+        }
+        }
+    }
+    return menor;
+}

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1629475525 source:d:\mauá\2021\est de dados\2° semestre\a2\ex de aula\agora vai\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

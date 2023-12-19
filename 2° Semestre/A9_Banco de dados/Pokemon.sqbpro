@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Mauá/2021/Est de dados/2° Semestre/A9_Banco de dados/Pokemon.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="2154"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:mainpokédex"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="integrantes" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="66"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="pokédex" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="106"/><column index="2" value="120"/><column index="3" value="66"/><column index="4" value="66"/><column index="5" value="52"/><column index="6" value="71"/><column index="7" value="69"/><column index="8" value="103"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">/*INSERT INTO
+pokédex
+VALUES(650, 'Bulbasaur','Grass', 'Poison', 45, 49, 49, 45);
+*/
+
+/*SELECT DISTINCT
+Tipo1, Tipo2, HP
+FROM pokédex
+	WHERE HP&gt;100 OR Tipo1='Fire'
+		GROUP BY HP
+		ORDER BY HP, Tipo1, Tipo2;
+*/
+		
+/*SELECT --AS
+	idPokémon AS ID,
+	Nome
+FROM pokédex;
+*/
+
+/*SELECT --BETWEEN
+	Nome, Ataque
+	FROM pokédex
+		WHERE Ataque BETWEEN 20 AND 50
+		ORDER BY Ataque;
+*/
+
+/*SELECT --IS NULL
+Nome, Tipo1, Tipo2
+FROM pokédex
+WHERE Tipo2 IS NULL;
+*/
+
+/*SELECT --IS NOT NULL
+Nome, Tipo1, Tipo2
+FROM pokédex
+WHERE Tipo2 IS NOT NULL;
+*/
+
+/*SELECT --IN
+Nome, Tipo1
+FROM pokédex
+WHERE Tipo1 IN ('Electric','Ground');
+*/
+
+/*SELECT --LIKE % ou _
+Nome
+FROM pokédex
+WHERE Nome LIKE 'a%';
+--WHERE HP LIKE '4_';
+*/
+
+/*SELECT --Média
+Nome, Ataque, Defesa, ( Ataque+Defesa )/2 AS Média
+FROM pokédex
+WHERE (Ataque+Defesa)/2 &gt; 80
+*/
+
+/*SELECT --CONCAT ou || ||
+(idPokémon||' - '||Nome) AS Nome from pokédex;
+*/
+
+/*SOME E ALL - nao implmentados no SQLeite
+*/
+
+/*SELECT --UNION
+Nome, Tipo1
+	FROM pokédex
+	WHERE Nome LIKE 'A___'
+UNION
+SELECT Nome, Tipo1
+	FROM pokédex
+	WHERE Tipo1 = 'Water';
+*
+/
+	
+
+
+	</sql><current_tab id="0"/></tab_sql></sqlb_project>

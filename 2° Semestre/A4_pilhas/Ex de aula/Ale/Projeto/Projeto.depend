@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1630681258 source:d:\mauá\2021\est de dados\2° semestre\a4_pilhas\ex de aula\ale\projeto\lista.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+
+1630681166 d:\mauá\2021\est de dados\2° semestre\a4_pilhas\ex de aula\ale\projeto\lista.h
+
+1630685589 source:d:\mauá\2021\est de dados\2° semestre\a4_pilhas\ex de aula\ale\projeto\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"lista.h"
+

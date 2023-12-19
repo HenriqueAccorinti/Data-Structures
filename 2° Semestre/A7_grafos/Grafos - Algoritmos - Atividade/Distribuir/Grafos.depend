@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1442845630 source:x:\ecm403\16 - grafos\aula 02 - algoritmos\distribuir\algoritmos - vazio\grafo.c
+	"grafo.h"
+
+1443964053 x:\ecm403\16 - grafos\aula 02 - algoritmos\distribuir\algoritmos - vazio\grafo.h
+
+1473768281 source:x:\ecm403\16 - grafos\aula 02 - algoritmos\distribuir\algoritmos - vazio\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1633703772 source:d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - algoritmos - atividade\distribuir\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1633698696 d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - algoritmos - atividade\distribuir\grafo.h
+
+1633703745 source:d:\mauá\2021\est de dados\2° semestre\a7_grafos\grafos - algoritmos - atividade\distribuir\grafo.c
+	"grafo.h"
+

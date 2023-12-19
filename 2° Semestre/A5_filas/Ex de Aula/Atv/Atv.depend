@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1631373299 source:d:\mauá\2021\est de dados\2° semestre\a5_filas\ex de aula\atv\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1631370886 d:\mauá\2021\est de dados\2° semestre\a5_filas\ex de aula\atv\fila.h
+
+1631385818 source:d:\mauá\2021\est de dados\2° semestre\a5_filas\ex de aula\atv\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"fila.h"
+

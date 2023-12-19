@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1621005696 source:d:\mauá\2021\est de dados\ex codeblocks\a7 - struct\dadosbiblioteca\main.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
